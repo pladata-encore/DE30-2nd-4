@@ -188,7 +188,8 @@ plt.xticks(range(0, len(variety_counts), tick_spacing), variety_counts.index[::t
 plt.tight_layout()
 plt.show()
 ```
-![price](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/aa08b594-7f04-486c-a9a6-f0b60935748e)
+![variety](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/b2d92db5-f3ac-4e04-9528-ecf970c130b3)
+
 
 
 ### 4. 결측치 처리
@@ -200,14 +201,15 @@ df1 = pd.read_csv('/content/drive/MyDrive/엔코어/winemag-data-130
 df1
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/2a257a6e-8a18-4fa5-9f85-58dcc472c42f/Untitled.png)
+![Untitled (28)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/1f163ad3-cc55-4a28-8f67-deca43dd22ee)
 
 ```python
 # 전체데이터 결측치 확인
 df1.isna().sum()
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/3c4ea734-03fb-4f22-8d73-7d8d743e7097/Untitled.png)
+![Untitled (1)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/abf1bf2b-3687-4578-9b31-bb17b5193c74)
+
 
 ```python
 # 사용할 데이터 남기고 컬럼 드랍하기
@@ -220,7 +222,9 @@ df1.drop(columns='taster_name', inplace = True)
 df1.drop(columns='designation', inplace = True)
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/a1c94c5b-48db-444f-8759-a9215a88d7f8/Untitled.png)
+![Untitled (2)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/ac4272d4-473f-4268-b078-ba26edd0efa7)
+
+
 
 winery와 title의 결측치가 없었기 때문에 이 컬럼을 활용해서 country와 province의 결측치를 채워주기
 
@@ -228,7 +232,9 @@ winery와 title의 결측치가 없었기 때문에 이 컬럼을 활용해서 c
 len(df1[df1['country'].isna()]), len(df1[df1['province'].isna()]), len(df1[df1['winery'].isna()])
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/c3cb7637-9b69-4bce-9864-a72230c30ec9/Untitled.png)
+![Untitled (3)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/3de781a5-f775-45e6-a24c-dc2d7086e521)
+
+
 
 결측치가 있는 행의 winery 값을 추출
 
@@ -236,7 +242,9 @@ len(df1[df1['country'].isna()]), len(df1[df1['province'].isna()]), len(df1[df1['
 df2[df2['winery'] == 'Gotsa Family Wines']
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/de5a6fdd-bcce-419e-af0e-13f1cc9a452a/f5bcd8e0-f853-46bb-a158-8be085d9a4f1.png)
+![Untitled (4)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/15ae86c5-9ed4-4ef6-99d0-2f7084ef9303)
+
+
 
 winery값을 기반으로 country와 province 값 채워주기
 
@@ -247,7 +255,8 @@ df2.loc[mask, 'province'] = 'Georgia'
 df2[df2['winery'] == 'Gotsa Family Wines']
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/104f1058-803b-4a78-9664-8dbb99661e9b/Untitled.png)
+![Untitled (5)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/2b318666-68d7-4ae3-9a0d-929c6018a82f)
+
 
 위의 과정 반복으로 country와 province결측치 처리
 
@@ -256,8 +265,8 @@ df2[df2['winery'] == 'Gotsa Family Wines']
 ```python
 df2.isna().sum()
 ```
+![Untitled (6)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/47284469-d226-4a44-a2c3-dd94e9bc9be1)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/c0267341-a595-4bec-adba-cc1dc599c01d/Untitled.png)
 
 ### 5. wine type구분
 
@@ -312,14 +321,15 @@ def determine_wine_type(row):
 df["wine_type"] = df.apply(determine_wine_type, axis=1)
 df.head()
 ```
+![Untitled (7)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/50f30a92-ac05-470d-b6f2-7e67cdc6f73c)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/b6327b40-418e-493a-b958-926fb7fd0534/Untitled.png)
 
 ```python
 df['wine_type'].value_counts()
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/1dc73f03-ae09-45ec-bac0-4095a719ce4a/Untitled.png)
+![Untitled (8)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/25914b26-b36b-47b1-a37d-6c70bd544f62)
+
 
 와인 type을 예측하지 못한 Unknown은 제거
 
@@ -327,8 +337,6 @@ df['wine_type'].value_counts()
 df_sorted = df_unique.sort_values(by=['title', 'price'])
 unique_title_rows = df_sorted.drop_duplicates(subset=['title'], keep='first')
 df_filtered  = unique_title_rows[unique_title_rows['wine_type'] != 'Unknown']
-
-df_filtered  `
 ```
 
 ### **6. 머신러닝 학습을 통한 Wine Type 추출**
@@ -368,7 +376,8 @@ df.loc[df['text_combined'].str.contains('spark', case=False), 'predicted_wine_ty
 print(df[['text_combined', 'predicted_wine_type']])
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/cd5d7562-dd78-4366-86d3-8f523449b0ce/Untitled.png)
+![Untitled (9)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/abf0e803-aad9-4993-82a9-77fd52a0ed7c)
+
 
 ```python
 # 예측한 값과 실제 값과 일치하는 비율 확인
@@ -378,7 +387,8 @@ matching_ratio = len(matching_rows) / len(df) * 100
 print(f"예측한 와인 타입과 실제 와인 타입이 일치하는 비율: {matching_ratio:.2f}%")
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/d024f9d5-c4d5-4a59-bd95-07c8734d819a/Untitled.png)
+![Untitled (10)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/5ab1d15b-6c61-4cc3-beb0-96b9f97ceeda)
+
 
 ```python
 # predicted_wine이랑 wine_type이랑 비교 시각화
@@ -399,8 +409,9 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 ```
+![Untitled (11)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/8604b70c-8d50-48fd-a178-0624c3224326)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/49eb9e1e-0423-4aec-b750-367637c2f144/Untitled.png)
+
 
 2.  Keras의 딥러닝을 이용해 학습한 모델로 와인 타입 예측
 
@@ -453,7 +464,8 @@ loss, accuracy = model.evaluate(X_test, y_test)
 print("Test Accuracy:", accuracy)
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/e29d17ab-96e3-4ccf-bbde-da070c467448/Untitled.png)
+![Untitled (12)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/c02dd2ea-9c30-4837-a39f-fec278cfcc25)
+
 
 ```python
 # 학습시킨 모델로 전체 데이터를 예측해본 결과
@@ -487,7 +499,8 @@ df['predicted_wine_type'] = predictions.argmax(axis=1)
 print(df[['text_combined', 'predicted_wine_type']])
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/47ae81dc-65c8-4d6f-b91e-880856ce8481/Untitled.png)
+![Untitled (13)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/e1abb22d-bc20-4f2f-b3f4-166ec2887a28)
+
 
 ```python
 # 원핫 인코딩 결과로 출력된걸 각 번호에 맞는 와인으로 변경
@@ -500,7 +513,8 @@ df['predicted_wine_type'] = df['predicted_wine_type'].map(wine_type_map)
 print(df[['text_combined', 'predicted_wine_type']])
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/a2ad21a3-a0e9-4ff9-a048-16d50b68dea7/Untitled.png)
+![Untitled (14)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/aadd2186-caca-437b-90c0-af2495017ffd)
+
 
 ```python
 # 예측한 값과 실제 값과 일치하는 비율 확인
@@ -511,7 +525,8 @@ matching_ratio = len(matching_rows) / len(df) * 100
 print(f"예측한 와인 타입과 실제 와인 타입이 일치하는 비율: {matching_ratio:.2f}%")
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/5417de50-0c20-4534-b9ab-b8088fad119c/Untitled.png)
+![Untitled (15)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/3171803b-baa0-4ea8-8108-502757d98910)
+
 
 ```python
 # predicted_wine이랑 wine_type이랑 비교 시각화
@@ -533,7 +548,8 @@ plt.ylabel('Actual')
 plt.show()
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/24ff97b4-fba9-47aa-8628-256feb66ead2/Untitled.png)
+![Untitled (16)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/42b5843b-71a9-413b-8cc1-83346db43a60)
+
 
 1.   Tf-idf와 SVC를 이용해 학습한 모델로 와인 타입 예측
 
@@ -572,8 +588,9 @@ y_pred = svm_model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 ```
+![Untitled (17)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/a5c12210-fff2-4ba3-a5c7-3b68bd3e1799)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/b3e63f60-b44f-45a3-94bf-a7d1d651553c/Untitled.png)
+
 
 ```python
 # 1차로 나온 predicted_wine이랑 wine_type이랑 비교 시각화
@@ -595,7 +612,8 @@ plt.ylabel('Actual')
 plt.show()
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/4c773a72-6784-404a-8693-c4f6d742c178/Untitled.png)
+![Untitled (18)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/eb8abfa0-ec79-4bde-bad2-8f209f47c6ba)
+
 
 ```python
 # 1차로 학습시킨 결과값을 이용해서 다시 전체를돌린 결과값 : (Accuracy: 0.9943318335729857)
@@ -628,8 +646,8 @@ y_pred = svm_model.predict(X_tfidf)
 accuracy = accuracy_score(y, y_pred)
 print("Accuracy:", accuracy)
 ```
+![Untitled (19)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/a7148759-23a5-4515-8d4a-a344f09e23ed)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/2b7cdaf2-b420-40e7-a74b-6d08e9f96225/Untitled.png)
 
 ```python
 # 1차로 나온 predicted_wine이랑 wine_type이랑 비교 시각화
@@ -650,20 +668,22 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 ```
+![Untitled (20)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/7655c3cf-1304-40ea-9c45-0b203081bc20)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/b65399e9-4904-4a37-b9d5-88a6f6c0b087/Untitled.png)
 
  **모델 선택**
 
-임베딩, LSTM, 밀집 레이어 -> 비정형 데이터를 다루는 딥러닝에 사용.
+임베딩, LSTM, 밀집 레이어 -> 비정형 데이터를 다루는 딥러닝에 사용된다.
 
-LogisticRegression -> 단순하고 빠르지만 복잡한 패턴에는 한계가 있음
-SVC -> 선형 및 비선형 문제에 모두 적합하지만 큰 데이터셋에서는 속도가 느림
-임베딩, LSTM, 밀집 레이어 -> 복합한 데이터 구조와 종속성을 캡처하데 매우 효과적이나 매우 복잡하고 계산 비용이 큼
+LogisticRegression -> 단순하고 빠르지만 복잡한 패턴에는 한계가 있다.
 
-예측 테이블을 정답이라고 가정하고 진행한 지도학습이기 때문에 정확성이 높은것이 정답이라고 결정하긴 어렵지만, 이중 가장 적합하다고 판단한 SVC모델로 예측한 wine_type을 정답이라고 가정하고 진행함
+SVC -> 선형 및 비선형 문제에 모두 적합하지만 큰 데이터셋에서는 속도가 느리다.
 
-이후 같은 모델로 여러번 학습을 진행시켜 오차값 비교 후 수정을 통해 오답률을 최소화함
+임베딩, LSTM, 밀집 레이어 -> 복합한 데이터 구조와 종속성을 캡처하데 매우 효과적이나 매우 복잡하고 계산 비용이 크다.
+
+예측 테이블을 정답이라고 가정하고 진행한 지도학습이기 때문에 정확성이 높은것이 정답이라고 결정하긴 어렵지만, 이중 가장 적합하다고 판단한 SVC모델로 예측한 wine_type을 정답이라고 가정하고 진행했다.
+
+이후 같은 모델로 여러번 학습을 진행시켜 오차값 비교 후 수정을 통해 오답률을 최소화했다.
 
 ```python
 # 2차로 학습시킨 결과값을 이용해서 다시 전체를돌린 결과값 : (Accuracy: 0.9987012384618953)
@@ -696,8 +716,8 @@ y_pred = svm_model.predict(X_tfidf)
 accuracy = accuracy_score(y, y_pred)
 print("Accuracy:", accuracy)
 ```
+![Untitled (21)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/6456c63d-99e8-47ad-bd88-5d6b4968bac9)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/4a2fe55c-f01e-4eb6-9726-657ba34c08c6/Untitled.png)
 
 ```python
 # 2차로 나온 predicted_wine이랑 wine_type이랑 비교 시각화
@@ -719,7 +739,8 @@ plt.ylabel('Actual')
 plt.show()
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/a83f5842-24ed-48de-9e31-dc085e0244e0/Untitled.png)
+![Untitled (22)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/4199292c-07e4-4e34-9be8-53d84bdc074e)
+
 
 ```python
 # 3차로 학습시킨 결과값을 이용해서 다시 전체를돌린 결과값 : (Accuracy: 0.9993227886265597)
@@ -753,7 +774,8 @@ accuracy = accuracy_score(y, y_pred)
 print("Accuracy:", accuracy)
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/ec689654-0352-4c62-be12-2611031e57ce/Untitled.png)
+![Untitled (23)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/fc42b509-53c0-47e4-adc4-d4230a912ae9)
+
 
 ```python
 # 3차로 나온 predicted_wine이랑 wine_type이랑 비교 시각화
@@ -774,8 +796,8 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 ```
+![Untitled (24)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/6c1c2fda-a0c4-4a28-945d-438d80904031)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/2dc6059b-ec89-4107-bd11-b2772cce6c3a/Untitled.png)
 
 ### 7. 챗봇 구현
 
@@ -802,20 +824,23 @@ plt.show()
     
     similarity 컬럼을 추가하여 유사도 수치를 확인
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/1022aed1-6aca-4c40-83f9-bfbb1f537e23/Untitled.png)
+![Untitled (25)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/512e1479-9f7a-488d-834c-f28292c2cba8)
+
     
 - wine_type 필터링
     
     사용자가 와인 타입에 해당하는 키워드를 입력하면 해당 타입의 와인들을 추천받을 수 있다.
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/bdd1fd34-c9f7-44f9-9b75-784cb14b82ec/95f38d5f-5dfc-4461-8d22-1599b0afe1fd.png)
-    
+
+    ![Untitled (26)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/b77c8b71-514e-4b4c-a66b-527986659f7d)
+
 
 - price 필터링
     
     사용자가 ["price", "cost", "priced", "dollar", "dollars", "$"] 등의 단어를 입력하면 나오는 사이드 바에 가격대의 범위를 지정할 수 있다.
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/1edd1418-cc78-4c89-93ec-d0c7ca731951/2f5325a0-64c3-455b-acb6-7ce69128885d/Untitled.png)
+![Untitled (27)](https://github.com/pladata-encore/DE30-2nd-4/assets/163945173/6a779654-8dd9-46a1-a120-a0b29594d217)
+
     
 
  **배포**
@@ -831,5 +856,5 @@ plt.show()
 - create app을 눌러 배포 진행
 
 ### 8. 결론
-- 사용자 입력값에서 수치형 값이 가격대를 의미하는지 생산연도를 의미하는지 파악에 어려움이 있음.
-- 와인의 타입별 분류에서 소단위 분류를 통해 더 자세한 분류가 가능하게 개선이 필요함.
+- 사용자 입력값에서 수치형 값이 가격대를 의미하는지 생산연도를 의미하는지 파악에 어려움이 있다.
+- 와인의 타입별 분류에서 소단위 분류를 통해 더 자세한 분류가 가능하게 지속적인 개선이 필요하다.
