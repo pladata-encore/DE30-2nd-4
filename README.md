@@ -846,14 +846,11 @@ plt.show()
  **배포**
 - github repository 생성 https://github.com/
     
-    반드시 Public으로 생성
-    
 - 파이썬 파일과 데이터셋파일 업로드
-    
-    **github 브라우저를 통해서 직접 올리면 파일당 25MB 제한,  명령줄을 이용하면 최대 100MB 추가 가능,** 100MB 이상이면 Git LFS(Git 대용량 파일 스토리지)를 이용해야 한다.
     
 - streamlit 홈페이지에서 회원가입 및 git 계정과 연동 진행 https://share.streamlit.io/
 - create app을 눌러 배포 진행
+- https://wine-recommender-chatbot.streamlit.app/
 
 ### 8. 결론
 - 사용자 입력값에서 수치형 값이 가격대를 의미하는지 생산연도를 의미하는지 파악에 어려움이 있다.
